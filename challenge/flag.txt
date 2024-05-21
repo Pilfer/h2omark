@@ -1,0 +1,1 @@
+CTF{This_Is_The_Flag_Good_Job}

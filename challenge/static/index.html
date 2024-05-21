@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>h20mark</title>
+  <style>body { background: black; color: #fff; } canvas { border: 3px solid white; } #result { border: 5px solid white; } td>img {max-width: 300px;}</style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+  <h1>Welcome to our Image Caption Contest!</h1>
+  <p>Try to come up with the best caption for this image.</p>
+  <p>We don't have a way to save your captions just yet, so use this page as practice!</p>
+  <p>
+    <img id="result" src="/img"/>
+  </p>
+  <p>
+    <form id="submit">
+      <label for="">Font color</label>
+      
+      <input autocomplete="off" style="width: 100px; padding: 5px;" type="text" id="fontcolor"
+      placeholder="black" value="black"/>
+      
+      <br>
+      
+      <br>
+
+      <label for="">Text</label>
+
+      <input style="width: 400px; padding: 5px;" type="text" id="caption"
+        autocomplete="off"
+        placeholder="Enter your caption and hit 'Enter' to submit"/>
+    </form>
+  </p>
+
+  <div>
+    <h2>Examples</h2>
+    <p>Here are some examples of hilarious captions we've come up with!</p>
+
+    <table>
+      <tr>
+        <td><img src="/create-watermark?text=wont you be my NEIGHbor&fontsize=30&fontcolor=green"/></td>
+        <td><img src="/create-watermark?fontsize=30&text=i invented the DDoS lmao&fontcolor=purple"/></td>
+        <td><img src="/create-watermark?fontcolor=black&text=elon musk and i dated once&fontsize=30"/></td>
+      </tr>
+      <tr>
+        <td><img src="/create-watermark?fontcolor=black&text=i need new shoes&fontsize=30&"/></td>
+        <td><img src="/create-watermark?text=GOT ANY GRAINS&fontsize=30&fontcolor=red"/></td>
+        <td><img src="/create-watermark?fontsize=30&textfile=horse&fontcolor=green"/></td>
+      </tr>
+      <tr>
+        <td><img src="/create-watermark?text=do i have anything in my teeth haha&fontsize=30&fontcolor=green"/></td>
+        <td><img src="/create-watermark?fontsize=30&text=in fact i would LOVE an apple&fontcolor=purple"/></td>
+        <td><img src="/create-watermark?text=made u look&fontcolor=black&fontsize=6"/></td>
+      </tr>
+    </table>
+  </div>
+<script>
+$(document).ready(function() {
+
+  $('#caption').keypress(function (e) {
+    if (e.which == 13) {
+      var caption = $('#caption').val();
+      var newURL = new URL(document.location.origin + '/create-watermark');
+      newURL.searchParams.append('text', caption);
+      newURL.searchParams.append('fontsize', 10);
+      newURL.searchParams.append('fontcolor', $('#fontcolor').val() || 'black');
+      
+      $('#result').attr('src', newURL.href);
+      return false;
+    }
+  });
+
+  $('#submit').submit((e) => {
+    e.preventDefault();
+  })
+});
+</script>
+</body>
+</html>
